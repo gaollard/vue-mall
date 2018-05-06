@@ -10,6 +10,7 @@
     <!--</ul>-->
     <ul class="movie-list">
       <li class="movie-item" v-for="item in subjects" :key="item.id">
+        <router-link :to="'/movie/' + item.id">
         <div class="item-left">
           <img class="movie-logo" :src="item.images.large" alt="">
         </div>
@@ -22,6 +23,7 @@
           </div>
           <div class="movie-average">豆瓣评分{{ item.rating.average }}</div>
         </div>
+        </router-link>
       </li>
     </ul>
   </div>
@@ -54,7 +56,6 @@ export default {
   },
   async mounted () {
     let res = await Api.top250()
-    console.log(res.data)
     this.subjects = res.data.subjects
   }
 }
