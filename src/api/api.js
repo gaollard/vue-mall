@@ -7,11 +7,9 @@ const host = process.env.NODE_ENV === 'production' ? '//api.douban.com/' : '/hos
  */
 
 export default class Api {
-
   // 电影 top250
   static top250 = () => axios.get(`${host}/v2/movie/top250`)
 
   // 电影详情
   static getMovieDetail = (movieId) => axios.get(`${host}/v2/movie/subject/${movieId}`)
-
 }

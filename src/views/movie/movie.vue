@@ -17,12 +17,12 @@
       <div class="movie-summary-text">{{ movieInfo.summary}}</div>
     </div>
     <ul class="list">
-      <li class="item" v-for="item in movieInfo.directors">
+      <li class="item" v-for="item in movieInfo.directors" :key="item.name">
         <div class="">{{ item.name }}</div>
       </li>
     </ul>
     <ul class="list">
-      <li class="item" v-for="item in movieInfo.casts">
+      <li class="item" v-for="item in movieInfo.casts" :key="item.name">
         <img :src="item.avatars.small" alt="">
         <div class="">{{ item.name }}</div>
       </li>
@@ -52,7 +52,7 @@ export default {
 .movie-logo-wrapper {
   overflow: hidden;
   position: relative;
-  height: 360px; 
+  height: 360px;
 }
 .movie-logo-cover {
   height: 100%;
