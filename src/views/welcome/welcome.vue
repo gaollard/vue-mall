@@ -10,19 +10,19 @@
     <!--</ul>-->
     <ul class="movie-list">
       <li class="movie-item" v-for="item in subjects" :key="item.id">
-        <router-link :to="'/movie/' + item.id">
-        <div class="item-left">
-          <img class="movie-logo" :src="item.images.large" alt="">
-        </div>
-        <div class="item-right">
-          <div class="movie-name">{{ item.title }}</div>
-          <div class="movie-desc">
-            <span class="movie-year">{{ item.year }}</span>
-            <span class="movie-genre" v-for="genre in item.genres" :key="genre">{{ genre }}</span>
-            <span class="move-director" v-for="director in item.directors" :key="director.name">{{ director.name }}</span>
+        <router-link class="link" :to="'/movie/' + item.id">
+          <div class="item-left fl">
+            <img class="movie-logo" :src="item.images.large" alt="">
           </div>
-          <div class="movie-average">豆瓣评分{{ item.rating.average }}</div>
-        </div>
+          <div class="item-right fr">
+            <div class="movie-name fr">{{ item.title }}</div>
+            <div class="movie-desc">
+              <span class="movie-year">{{ item.year }}</span>
+              <span class="movie-genre" v-for="genre in item.genres" :key="genre">{{ genre }}</span>
+              <span class="move-director" v-for="director in item.directors" :key="director.name">{{ director.name }}</span>
+            </div>
+            <div class="movie-average">豆瓣评分{{ item.rating.average }}</div>
+          </div>
         </router-link>
       </li>
     </ul>
@@ -89,6 +89,10 @@ export default {
     position: relative;
     display: flex;
     padding: 10px;
+    .link {
+      display: block;
+      /*width: 100%;*/
+    }
     &::after {
       content: " ";
       position: absolute;
