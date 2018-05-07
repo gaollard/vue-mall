@@ -2,10 +2,11 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Welcome from '@/views/welcome/welcome'
 // import Movie from '@/views/welcome/welcome'
+import Login from '../views/login/login'
 import MovieDetail from '../views/movie/movie'
 import Account from '../views/account/account'
-import Login from '../views/login/login'
-
+import Musics from '../views/musics/musics'
+import BooksView from '../views/books/books'
 import store from 'store'
 
 Vue.use(Router)
@@ -26,6 +27,16 @@ const router = new Router({
       path: '/movie/:movieId',
       name: 'MovieDetail',
       component: MovieDetail
+    },
+    {
+      path: '/musics',
+      name: 'Musics',
+      component: Musics
+    },
+    {
+      path: '/books',
+      name: 'Books',
+      component: BooksView
     },
     {
       path: '/account',

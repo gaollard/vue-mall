@@ -1,5 +1,5 @@
 import axios from 'axios'
-const host = process.env.NODE_ENV === 'production' ? '//api.douban.com/' : '/host'
+const host = process.env.NODE_ENV === 'production' ? 'https://api.douban.com/' : '/host'
 
 /**
  * 豆瓣电影 api
@@ -12,4 +12,6 @@ export default class Api {
 
   // 电影详情
   static getMovieDetail = (movieId) => axios.get(`${host}/v2/movie/subject/${movieId}`)
+
+  static searchMusic = (key) => axios.get(`${host}/v2/music/search?q=${key}`)
 }
