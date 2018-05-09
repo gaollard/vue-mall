@@ -1,20 +1,22 @@
+@import '../../scss/vars.scss';
+
 * {
   padding: 0;
   margin: 0;
 }
 
 body {
-  background-color: #f4f4f4;
-  -webkit-user-select: none;
   user-select: none;
+  background-color: $body-bg-color;
 }
 
 body, button, input, select, table, textarea {
-  font: 12px/1.5 Tahoma,Helvetica,Arial,sans-serif;
-  font-family: Microsoft YaHei,Tahoma,Helvetica,Arial,sans-serif;
+  font-size: $body-font-size;
+  line-height: 1.5;
+  font-family: $body-font-family;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
+  color: $body-font-color;
 }
 
 ul, li {
