@@ -13,5 +13,5 @@ export default class Api {
   // 电影详情
   static getMovieDetail = (movieId) => axios.get(`${host}/v2/movie/subject/${movieId}`)
 
-  static searchMusic = (key) => axios.get(`${host}/v2/music/search?q=${key}`)
+  static searchMusic = (key) => axios.get(`${host}/v2/music/search?tag=流行音乐`)
 }

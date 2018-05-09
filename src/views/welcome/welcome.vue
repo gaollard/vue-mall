@@ -1,13 +1,19 @@
 <template>
   <div class="wrap">
     <ul class="cate-list">
-      <li class="cate-item">音乐</li>
-      <li class="cate-item">电影</li>
-      <li class="cate-item">图书</li>
+      <li class="cate-item">
+        <router-link to="/musics">音乐</router-link>
+      </li>
+      <li class="cate-item">
+        <router-link to="/movies">电影</router-link>
+      </li>
+      <li class="cate-item">
+        <router-link to="/books">图书</router-link>
+      </li>
     </ul>
-    <!--<ul class="brand-list">-->
-      <!--<li class="brand-item" v-for="(item, index) in tags" :key="index">{{item.text}}</li>-->
-    <!--</ul>-->
+    <ul class="brand-list">
+      <li class="brand-item" v-for="(item, index) in tags" :key="index">{{item.text}}</li>
+    </ul>
     <ul class="movie-list">
       <li class="movie-item" v-for="item in subjects" :key="item.id">
         <router-link class="link" :to="'/movie/' + item.id">
@@ -62,67 +68,67 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .cate-list {
-    position: relative;
-    display: flex;
-    &::after {
-      content: " ";
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 100%;
-      height: 1px;
-      background-color: #F5F5F5;
-    }
-  }
-  .cate-item {
-    flex: 1;
-    height: 46px;
-    line-height: 46px;
-    text-align: center;
-  }
-  .brand-list {
+.cate-list {
+  position: relative;
+  display: flex;
+  &::after {
+    content: " ";
     position: absolute;
-    width: 80px;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #F5F5F5;
   }
-  .movie-item {
-    position: relative;
-    display: flex;
-    padding: 10px;
-    .link {
-      display: block;
-      /*width: 100%;*/
-    }
-    &::after {
-      content: " ";
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 100%;
-      height: 1px;
-      background-color: #F5F5F5;
-    }
-    .item-right {
-      flex: 1;
-      margin-left: 16px;
-    }
-    .movie-logo {
-      display: block;
-      width: 78px;
-    }
-    .movie-name {
-      margin-top: 10px;
-      font-size: 16px;
-    }
-    .movie-desc {
-      margin-top: 10px;
-      font-size: 12px;
-      color: #666;
-    }
-    .movie-average {
-      margin-top: 28px;
-      font-size: 12px;
-      color: #9c6a6a;
-    }
+}
+.cate-item {
+  flex: 1;
+  height: 46px;
+  line-height: 46px;
+  text-align: center;
+}
+.brand-list {
+  position: absolute;
+  width: 80px;
+}
+.movie-item {
+  position: relative;
+  display: flex;
+  padding: 10px;
+  .link {
+    display: block;
+    /*width: 100%;*/
   }
+  &::after {
+    content: " ";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #F5F5F5;
+  }
+  .item-right {
+    flex: 1;
+    margin-left: 16px;
+  }
+  .movie-logo {
+    display: block;
+    width: 78px;
+  }
+  .movie-name {
+    margin-top: 10px;
+    font-size: 16px;
+  }
+  .movie-desc {
+    margin-top: 10px;
+    font-size: 12px;
+    color: #666;
+  }
+  .movie-average {
+    margin-top: 28px;
+    font-size: 12px;
+    color: #9c6a6a;
+  }
+}
 </style>

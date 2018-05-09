@@ -2,6 +2,7 @@
   <div class="wrapper">
     <ul class="music-list">
       <li class="music-item" v-for="item in musicList" :key="item.id">
+        <img :src="item.image" alt="">
         <div class="item-title">{{ item.title }}</div>
       </li>
     </ul>
@@ -19,15 +20,15 @@ export default {
   },
   async mounted () {
     let res = await Api.searchMusic('流行')
-    this.musicList= res.data.musics
+    this.musicList = res.data.musics
     console.log(res)
   }
 }
 </script>
 
 <style lang="scss" scoped>
-  .music-item {
-    position: relative;
-    padding: 10px;
-  }
+.music-item {
+  position: relative;
+  padding: 10px;
+}
 </style>

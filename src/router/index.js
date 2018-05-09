@@ -1,13 +1,21 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Welcome from '@/views/welcome/welcome'
-// import Movie from '@/views/welcome/welcome'
-import Login from '../views/login/login'
-import MovieDetail from '../views/movie/movie'
-import Account from '../views/account/account'
-import Musics from '../views/musics/musics'
-import BooksView from '../views/books/books'
 import store from 'store'
+
+// 首页
+const Welcome = () => import('../views/welcome/welcome')
+// 登录
+const Login = () => import('../views/login/login')
+// 个人中心
+const Account = () => import('../views/account/account')
+// 音乐
+const Musics = () => import('../views/musics/musics')
+// 书籍
+const Books = () => import('../views/books/books')
+// 电影详情
+const MovieDetail = () => import('../views/movie/movie')
+// 404
+const Lost = () => import('../views/lost/lost')
 
 Vue.use(Router)
 
@@ -19,8 +27,8 @@ const router = new Router({
       component: Welcome
     },
     {
-      path: '/movie',
-      name: 'Movie',
+      path: '/movies',
+      name: 'Movies',
       component: Welcome
     },
     {
@@ -36,7 +44,7 @@ const router = new Router({
     {
       path: '/books',
       name: 'Books',
-      component: BooksView
+      component: Books
     },
     {
       path: '/account',
@@ -48,6 +56,11 @@ const router = new Router({
       path: '/login',
       name: 'Login',
       component: Login
+    },
+    {
+      path: '*',
+      name: 'Lost',
+      component: Lost
     }
   ]
 })
