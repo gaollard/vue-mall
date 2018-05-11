@@ -1,10 +1,12 @@
 <template>
-  <div class="wrap">
-    <swiper class="banner-list" :options="swiperOption">
-      <swiper-slide class="banner-item" v-for="(item, index) in bannerList" :key="index">
-        <img class="banner-img" :src="item.img" alt=""/>
-      </swiper-slide>
-    </swiper>
+  <div class="view">
+    <div class="banner-list">
+      <swiper :options="swiperOption">
+        <swiper-slide class="banner-item" v-for="(item, index) in banners" :key="index">
+          <img class="banner-img" :src="item.img" alt=""/>
+        </swiper-slide>
+      </swiper>
+    </div>
     <div class="tag-list-wrap">
       <ul class="tag-list">
         <li class="tag-item" v-for="(item, index) in tags" :key="index">{{item.text}}</li>
@@ -33,8 +35,7 @@
 
 <script type="text/javascript">
 import 'swiper/dist/css/swiper.css'
-import { swiper, swiperSlide } from 'vue-awesome-swiper'
-import Api from '../../api/api'
+import {swiper, swiperSlide} from 'vue-awesome-swiper'
 export default {
   components: {
     swiper,
@@ -44,43 +45,22 @@ export default {
     return {
       swiperOption: {
         autoplay: true
-      },
-      bannerList: [{
-        img: 'https://mall.s.maizuo.com/0690e3551f92b8b1dcdf9be0dc3b9b69.jpg?x-oss-process=image/quality,Q_70',
-        link: ''
-      },{
-        img: 'https://mall.s.maizuo.com/2653a4597c3a11e74fe858185917fb1e.jpg?x-oss-process=image/quality,Q_70',
-        link: ''
-      }],
-      subjects: [],
-      tags: [{
-        text: '正在热映',
-        id: 'in_theaters'
-      }, {
-        text: '即将上映'
-      }, {
-        text: 'top250',
-        id: ''
-      }, {
-        text: '口碑榜',
-        id: ''
-      }, {
-        text: '北美票房榜',
-        id: ''
-      }, {
-        text: '新片榜'
-      }, {
-        text: '欧美票房'
-      }, {
-        text: '亚洲票房'
-      }, {
-        text: '搜狐榜'
-      }]
+      }
     }
   },
-  async mounted () {
-    let res = await Api.top250()
-    this.subjects = res.data.subjects
+  computed: {
+    tags () {
+      return this.$store.state.movie.tags
+    },
+    banners () {
+      return this.$store.state.movie.banners
+    },
+    subjects () {
+      return this.$store.state.movie.list
+    }
+  },
+  mounted () {
+    this.$store.dispatch('movie/getMovies')
   }
 }
 </script>
@@ -115,7 +95,7 @@ export default {
 }
 
 .tag-list-wrap {
-  $height: 40px;
+  $height: 42px;
   width: 100%;
   height: $height;
   overflow-x: auto;
@@ -130,7 +110,7 @@ export default {
       flex-shrink: 0;
       height: 100%;
       padding: 0 10px;
-      font-size: 14px;
+      font-size: 12px;
       line-height: $height;
     }
   }
