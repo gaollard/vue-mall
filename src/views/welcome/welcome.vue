@@ -34,7 +34,6 @@
 </template>
 
 <script type="text/javascript">
-import Api from '../../api/api'
 export default {
   data () {
     return {
@@ -42,8 +41,7 @@ export default {
     }
   },
   async mounted () {
-    let res = await Api.top250()
-    this.subjects = res.data.subjects
+    console.log(1)
   }
 }
 </script>

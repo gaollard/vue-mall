@@ -12,30 +12,42 @@
         <li class="tag-item" v-for="(item, index) in tags" :key="index">{{item.text}}</li>
       </ul>
     </div>
-    <ul class="movie-list">
-      <li class="movie-item" v-for="item in subjects" :key="item.id">
-        <router-link class="link" :to="'/movie/' + item.id">
-          <div class="item-left fl">
-            <img class="movie-logo" :src="item.images.large" alt="">
-          </div>
-          <div class="item-right fr">
-            <div class="movie-name fr">{{ item.title }}</div>
-            <div class="movie-desc">
-              <span class="movie-year">{{ item.year }}</span>
-              <span class="movie-genre" v-for="genre in item.genres" :key="genre">{{ genre }}</span>
-              <span class="move-director" v-for="director in item.directors" :key="director.name">{{ director.name }}</span>
+    <div class="loading-text" v-if="loading && subjects.length === 0">- 加载中 -</div>
+    <div v-show="subjects.length">
+      <ul class="movie-list"
+        v-infinite-scroll="loadMore"
+        infinite-scroll-disabled="loading"
+        infinite-scroll-distance="10">
+        <li class="movie-item" v-for="item in subjects" :key="item.id">
+          <router-link class="link" :to="'/movie/' + item.id">
+            <div class="item-left fl">
+              <img class="movie-logo" :src="item.images.large" alt="">
             </div>
-            <div class="movie-average">豆瓣评分{{ item.rating.average }}</div>
-          </div>
-        </router-link>
-      </li>
-    </ul>
+            <div class="item-right fr">
+              <div class="movie-name fr">{{ item.title }}</div>
+              <div class="movie-desc">
+                <span class="movie-year">{{ item.year }}</span>
+                <span class="movie-genre" v-for="genre in item.genres" :key="genre">{{ genre }}</span>
+                <span class="move-director" v-for="director in item.directors" :key="director.name">{{ director.name }}</span>
+              </div>
+              <div class="movie-average">豆瓣评分{{ item.rating.average }}</div>
+            </div>
+          </router-link>
+        </li>
+      </ul>
+      <div class="loading-text" v-show="loading">- 加载中 -</div>
+      <div class="loading-text" v-show="subjects.length === pageInfo.total">- 没有更多数据 -</div>
+    </div>
   </div>
 </template>
 
 <script type="text/javascript">
+import Vue from 'vue'
 import 'swiper/dist/css/swiper.css'
 import {swiper, swiperSlide} from 'vue-awesome-swiper'
+import { InfiniteScroll } from 'mint-ui'
+Vue.use(InfiniteScroll)
+
 export default {
   components: {
     swiper,
@@ -57,6 +69,19 @@ export default {
     },
     subjects () {
       return this.$store.state.movie.list
+    },
+    loading () {
+      return this.$store.state.movie.loading
+    },
+    pageInfo () {
+      return this.$store.getters['movie/pageInfo']
+    }
+  },
+  methods: {
+    loadMore () {
+      if (this.loading) return false
+      if (parseInt(this.pageInfo.start) >= parseInt) return false
+      this.$store.dispatch('movie/loadMore')
     }
   },
   mounted () {
@@ -66,6 +91,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+.loading-text {
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+}
 
 .banner-list {
   .banner-img {
@@ -95,6 +126,9 @@ export default {
 }
 
 .tag-list-wrap {
+  z-index: 99;
+  position: sticky;
+  top: 0px;
   $height: 42px;
   width: 100%;
   height: $height;

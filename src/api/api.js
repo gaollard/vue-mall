@@ -12,12 +12,17 @@ const host = process.env.NODE_ENV === 'production' ? 'https://api.douban.com/' :
  * https://developers.douban.com/wiki/?title=movie_v2#subject
  */
 
-export default class Api {
+export default {
   // 电影 top250
-  static top250 = () => axios.get(`${host}/v2/movie/top250`)
-
+  getMovieTop250 (start, count) {
+    return axios.get(`${host}/v2/movie/top250?start=${start}&count=${count}`)
+  },
   // 电影详情
-  static getMovieDetail = (movieId) => axios.get(`${host}/v2/movie/subject/${movieId}`)
-
-  static searchMusic = (key) => axios.get(`${host}/v2/music/search?tag=流行音乐`)
+  getMovieDetail (movieId) {
+    return axios.get(`${host}/v2/movie/subject/${movieId}`)
+  },
+  // 音乐搜索
+  searchMusic (tag) {
+    return axios.get(`${host}/v2/music/search?tag=${tag}`)
+  }
 }

@@ -1,4 +1,5 @@
-import Api from '../../api/api'
+import api from '../../api/api'
+import { Toast } from 'mint-ui'
 
 // 电影标签
 const tags = [{
@@ -39,6 +40,7 @@ const state = {
   tags,
   tag: '',
   list: [],
+  loading: false,
   pageInfo: {
     start: 0,
     count: 10,
@@ -52,25 +54,54 @@ const mutations = {
   },
   getPageInfo (state, payload) {
     state.pageInfo = payload
+  },
+  setLoading (state, payload) {
+    state.loading = payload
+  }
+}
+
+const getters = {
+  pageInfo (state) {
+    return {
+      start: parseInt(state.pageInfo.start),
+      count: parseInt(state.pageInfo.count),
+      total: parseInt(state.pageInfo.total)
+    }
   }
 }
 
 const actions = {
-  async getMovies ({commit}) {
+  async getMovies ({commit, state}) {
     try {
-      let res = await Api.top250()
+      commit('setLoading', true)
+      let res = await api.getMovieTop250(state.pageInfo.start, state.pageInfo.count)
       const {count, start, subjects, total} = res.data
       commit('getMovies', subjects)
       commit('getPageInfo', {count, start, total})
+      commit('setLoading', false)
     } catch (e) {
       console.log(e)
+      Toast({
+        message: e.msg,
+        position: 'bottom',
+        duration: 5000
+      })
     }
+  },
+  async loadMore ({commit, state}) {
+    commit('setLoading', true)
+    let res = await api.getMovieTop250(state.list.length, state.pageInfo.count)
+    const {count, start, subjects, total} = res.data
+    commit('getMovies', state.list.concat(subjects))
+    commit('getPageInfo', {count, start, total})
+    commit('setLoading', false)
   }
 }
 
 export default {
   namespaced: true,
   state,
+  getters,
   mutations,
   actions
 }

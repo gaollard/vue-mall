@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "mint-ui": "^2.2.13",
     "store": "^2.0.12",
     "vue": "^2.5.2",
     "vue-awesome-swiper": "^3.1.3",
