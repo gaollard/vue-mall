@@ -2,6 +2,12 @@ import axios from 'axios'
 const host = process.env.NODE_ENV === 'production' ? 'https://api.douban.com/' : '/host'
 
 /**
+ * zhuanzhuan: https://m.zhuanzhuan.58.com/youpin/website/list.html?smark=ws11
+ * xiaomi: https://m.mi.com
+ * sudanyouxuan: https://m.sdyxmall.com/v1/?co=sdyx#/
+ */
+
+/**
  * 豆瓣电影 api
  * https://developers.douban.com/wiki/?title=movie_v2#subject
  */

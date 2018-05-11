@@ -56,7 +56,7 @@ export default {
 }
 .movie-logo-cover {
   height: 100%;
-  filter: blur(180px);
+  filter: blur(40px);
 }
 .movie-logo {
   position: absolute;

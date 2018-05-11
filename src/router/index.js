@@ -4,16 +4,25 @@ import store from 'store'
 
 // 首页
 const Welcome = () => import('../views/welcome/welcome')
+
 // 登录
 const Login = () => import('../views/login/login')
+
 // 个人中心
 const Account = () => import('../views/account/account')
+
+// 电影
+const Movies = () => import('../views/movies/movies')
+
 // 音乐
 const Musics = () => import('../views/musics/musics')
+
 // 书籍
 const Books = () => import('../views/books/books')
+
 // 电影详情
 const MovieDetail = () => import('../views/movie/movie')
+
 // 404
 const Lost = () => import('../views/lost/lost')
 
@@ -29,7 +38,7 @@ const router = new Router({
     {
       path: '/movies',
       name: 'Movies',
-      component: Welcome
+      component: Movies
     },
     {
       path: '/movie/:movieId',

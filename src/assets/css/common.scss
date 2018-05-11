@@ -35,3 +35,10 @@ a {
 .fr {
   float: right;
 }
+
+.clearfix::after {
+  content: " ";
+  display: block;
+  clear: both;
+  height: 0;
+}

@@ -1,17 +1,15 @@
 <template>
   <div class="wrap">
-    <img width="100%" src="https://mall.s.maizuo.com/477c3a31cd14cb55b5cb019d73b28b4a.jpg?x-oss-process=image/quality,Q_70" alt="">
-    <ul class="cate-list">
-      <li class="cate-item">
-        <router-link to="/musics">音乐</router-link>
-      </li>
-      <li class="cate-item">
-        <router-link to="/movies">电影</router-link>
-      </li>
-      <li class="cate-item">
-        <router-link to="/books">图书</router-link>
-      </li>
-    </ul>
+    <swiper class="banner-list" :options="swiperOption">
+      <swiper-slide class="banner-item" v-for="(item, index) in bannerList" :key="index">
+        <img class="banner-img" :src="item.img" alt=""/>
+      </swiper-slide>
+    </swiper>
+    <div class="tag-list-wrap">
+      <ul class="tag-list">
+        <li class="tag-item" v-for="(item, index) in tags" :key="index">{{item.text}}</li>
+      </ul>
+    </div>
     <ul class="movie-list">
       <li class="movie-item" v-for="item in subjects" :key="item.id">
         <router-link class="link" :to="'/movie/' + item.id">
@@ -34,11 +32,50 @@
 </template>
 
 <script type="text/javascript">
+import 'swiper/dist/css/swiper.css'
+import { swiper, swiperSlide } from 'vue-awesome-swiper'
 import Api from '../../api/api'
 export default {
+  components: {
+    swiper,
+    swiperSlide
+  },
   data () {
     return {
-      subjects: []
+      swiperOption: {
+        autoplay: true
+      },
+      bannerList: [{
+        img: 'https://mall.s.maizuo.com/0690e3551f92b8b1dcdf9be0dc3b9b69.jpg?x-oss-process=image/quality,Q_70',
+        link: ''
+      },{
+        img: 'https://mall.s.maizuo.com/2653a4597c3a11e74fe858185917fb1e.jpg?x-oss-process=image/quality,Q_70',
+        link: ''
+      }],
+      subjects: [],
+      tags: [{
+        text: '正在热映',
+        id: 'in_theaters'
+      }, {
+        text: '即将上映'
+      }, {
+        text: 'top250',
+        id: ''
+      }, {
+        text: '口碑榜',
+        id: ''
+      }, {
+        text: '北美票房榜',
+        id: ''
+      }, {
+        text: '新片榜'
+      }, {
+        text: '欧美票房'
+      }, {
+        text: '亚洲票房'
+      }, {
+        text: '搜狐榜'
+      }]
     }
   },
   async mounted () {
@@ -49,6 +86,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+.banner-list {
+  .banner-img {
+    display: block;
+    width: 100%;
+  }
+}
+
 .cate-list {
   position: relative;
   display: flex;
@@ -61,24 +106,42 @@ export default {
     height: 1px;
     background-color: #F5F5F5;
   }
+  .cate-item {
+    flex: 1;
+    height: 46px;
+    line-height: 46px;
+    text-align: center;
+  }
 }
-.cate-item {
-  flex: 1;
-  height: 46px;
-  line-height: 46px;
-  text-align: center;
+
+.tag-list-wrap {
+  $height: 40px;
+  width: 100%;
+  height: $height;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  background-color: #fff;
+  .tag-list {
+    display: flex;
+    flex-wrap: nowrap;
+    height: 100%;
+    align-items: center;
+    .tag-item {
+      flex-shrink: 0;
+      height: 100%;
+      padding: 0 10px;
+      font-size: 14px;
+      line-height: $height;
+    }
+  }
 }
-.brand-list {
-  position: absolute;
-  width: 80px;
-}
+
 .movie-item {
   position: relative;
   display: flex;
   padding: 10px;
   .link {
     display: block;
-    /*width: 100%;*/
   }
   &::after {
     content: " ";
