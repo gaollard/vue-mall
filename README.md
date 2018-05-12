@@ -1,6 +1,8 @@
-# vue-book
+# vue练习
 
-> A Vue.js project
+vue练习项目
+
+`mint-ui` `axios` `vue-router` `vuex`
 
 ## Build Setup
 
