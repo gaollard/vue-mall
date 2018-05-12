@@ -27,23 +27,24 @@
         infinite-scroll-distance="10">
         <li class="movie-item" v-for="item in subjects" :key="item.id">
           <router-link class="link" :to="'/movie/' + item.id">
-            <div class="item-left fl">
-              <img class="movie-logo" :src="item.images.large"/>
+            <div class="item-left">
+              <img class="movie-logo" v-lazy="item.images.large"/>
             </div>
-            <div class="item-right fr">
-              <div class="movie-name fr">{{ item.title }}</div>
+            <div class="item-right">
+              <div class="movie-name">{{ item.title }}</div>
               <div class="movie-desc">
                 <span class="movie-year">{{ item.year }}</span>
-                <span class="movie-genre" v-for="genre in item.genres" :key="genre">{{ genre }}</span>
-                <span class="move-director" v-for="director in item.directors" :key="director.name">{{ director.name }}</span>
+                <span class="movie-genre" v-for="genre in item.genres" :key="genre">{{ genre }}/</span>
+                <span class="move-director" v-for="director in item.directors" :key="director.name">{{ director.name }}/</span>
               </div>
               <div class="movie-average">豆瓣评分{{ item.rating.average }}</div>
+              <!-- <button>想看</button> -->
             </div>
           </router-link>
         </li>
       </ul>
       <div class="loading-text" v-show="loading">- 加载中 -</div>
-      <div class="loading-text" v-show="subjects.length === pageInfo.total">- 没有更多数据 -</div>
+      <div class="loading-text" v-show="!loading && subjects.length === pageInfo.total">- 没有更多数据 -</div>
     </div>
   </div>
 </template>
@@ -52,9 +53,11 @@
 import Vue from 'vue'
 import 'swiper/dist/css/swiper.css'
 import {swiper, swiperSlide} from 'vue-awesome-swiper'
-import { InfiniteScroll } from 'mint-ui'
+import { InfiniteScroll, Lazyload } from 'mint-ui'
 import { mapState } from 'vuex'
+
 Vue.use(InfiniteScroll)
+Vue.use(Lazyload)
 
 export default {
   components: {
@@ -81,7 +84,7 @@ export default {
   methods: {
     loadMore () {
       if (this.loading) return false
-      if (this.pageInfo.start >= this.pageInfo.total) return false
+      if (this.subjects.length >= this.pageInfo.total) return false
       this.$store.dispatch('movie/loadMore')
     },
     switchTag (tag) {
@@ -98,6 +101,8 @@ export default {
 
 <style lang="scss" scoped>
 
+@import '../../scss/vars.scss';
+
 .loading-text {
   height: 40px;
   line-height: 40px;
@@ -108,26 +113,6 @@ export default {
   .banner-img {
     display: block;
     width: 100%;
-  }
-}
-
-.cate-list {
-  position: relative;
-  display: flex;
-  &::after {
-    content: " ";
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 1px;
-    background-color: #F5F5F5;
-  }
-  .cate-item {
-    flex: 1;
-    height: 46px;
-    line-height: 46px;
-    text-align: center;
   }
 }
 
@@ -147,6 +132,7 @@ export default {
     height: 100%;
     align-items: center;
     .tag-item {
+      position: relative;
       flex-shrink: 0;
       height: 100%;
       padding: 0 10px;
@@ -155,16 +141,25 @@ export default {
       &.is-current {
         font-weight: bold;
       }
+      &::after {
+        content: " ";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 1px;
+        background-color: $body-bg-color;
+      }
     }
   }
 }
 
 .movie-item {
   position: relative;
-  display: flex;
-  padding: 10px;
   .link {
-    display: block;
+    display: flex;
+    padding: 10px;
+    background-color: #fff;
   }
   &::after {
     content: " ";
@@ -184,7 +179,7 @@ export default {
     width: 78px;
   }
   .movie-name {
-    margin-top: 10px;
+    margin-top: 0px;
     font-size: 16px;
   }
   .movie-desc {
