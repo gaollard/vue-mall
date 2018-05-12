@@ -17,6 +17,9 @@ export default {
   getMovieTop250 (start, count) {
     return axios.get(`${host}/v2/movie/top250?start=${start}&count=${count}`)
   },
+  getMovies (tag, start, count) {
+    return axios.get(`${host}/v2/movie/${tag}?start=${start}&count=${count}`)
+  },
   // 电影详情
   getMovieDetail (movieId) {
     return axios.get(`${host}/v2/movie/subject/${movieId}`)

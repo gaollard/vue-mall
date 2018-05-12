@@ -2,17 +2,24 @@
   <div class="view">
     <div class="banner-list">
       <swiper :options="swiperOption">
-        <swiper-slide class="banner-item" v-for="(item, index) in banners" :key="index">
-          <img class="banner-img" :src="item.img" alt=""/>
+        <swiper-slide class="banner-item"
+          v-for="(item, index) in banners"
+          :key="index">
+          <img class="banner-img" :src="item.img"/>
         </swiper-slide>
       </swiper>
     </div>
     <div class="tag-list-wrap">
       <ul class="tag-list">
-        <li class="tag-item" v-for="(item, index) in tags" :key="index">{{item.text}}</li>
+        <li class="tag-item"
+          :class="{'is-current': tag === item}"
+          v-for="(item, index) in tags"
+          @click="switchTag(item)"
+          :key="index">{{item.text}}</li>
       </ul>
     </div>
-    <div class="loading-text" v-if="loading && subjects.length === 0">- 加载中 -</div>
+    <div class="loading-text"
+      v-if="loading && subjects.length === 0">- 加载中 -</div>
     <div v-show="subjects.length">
       <ul class="movie-list"
         v-infinite-scroll="loadMore"
@@ -21,7 +28,7 @@
         <li class="movie-item" v-for="item in subjects" :key="item.id">
           <router-link class="link" :to="'/movie/' + item.id">
             <div class="item-left fl">
-              <img class="movie-logo" :src="item.images.large" alt="">
+              <img class="movie-logo" :src="item.images.large"/>
             </div>
             <div class="item-right fr">
               <div class="movie-name fr">{{ item.title }}</div>
@@ -46,6 +53,7 @@ import Vue from 'vue'
 import 'swiper/dist/css/swiper.css'
 import {swiper, swiperSlide} from 'vue-awesome-swiper'
 import { InfiniteScroll } from 'mint-ui'
+import { mapState } from 'vuex'
 Vue.use(InfiniteScroll)
 
 export default {
@@ -61,27 +69,25 @@ export default {
     }
   },
   computed: {
-    tags () {
-      return this.$store.state.movie.tags
-    },
-    banners () {
-      return this.$store.state.movie.banners
-    },
-    subjects () {
-      return this.$store.state.movie.list
-    },
-    loading () {
-      return this.$store.state.movie.loading
-    },
-    pageInfo () {
-      return this.$store.getters['movie/pageInfo']
-    }
+    ...mapState('movie', {
+      tag: state => state.tag,
+      tags: state => state.tags,
+      banners: state => state.banners,
+      subjects: state => state.list,
+      loading: state => state.loading,
+      pageInfo: (state, getters) => getters.pageInfo
+    })
   },
   methods: {
     loadMore () {
       if (this.loading) return false
-      if (parseInt(this.pageInfo.start) >= parseInt) return false
+      if (this.pageInfo.start >= this.pageInfo.total) return false
       this.$store.dispatch('movie/loadMore')
+    },
+    switchTag (tag) {
+      if (tag === this.tag) return false
+      this.$store.commit('movie/setTag', tag)
+      this.$store.dispatch('movie/getMovies')
     }
   },
   mounted () {
@@ -146,6 +152,9 @@ export default {
       padding: 0 10px;
       font-size: 12px;
       line-height: $height;
+      &.is-current {
+        font-weight: bold;
+      }
     }
   }
 }

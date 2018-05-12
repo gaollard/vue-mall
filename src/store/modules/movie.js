@@ -2,29 +2,14 @@ import api from '../../api/api'
 import { Toast } from 'mint-ui'
 
 // 电影标签
-const tags = [{
-  text: '正在热映',
-  id: 'in_theaters'
-}, {
-  text: '即将上映'
-}, {
-  text: 'top250',
-  id: ''
-}, {
-  text: '口碑榜',
-  id: ''
-}, {
-  text: '北美票房榜',
-  id: ''
-}, {
-  text: '新片榜'
-}, {
-  text: '欧美票房'
-}, {
-  text: '亚洲票房'
-}, {
-  text: '搜狐榜'
-}]
+const tags = [
+  {text: '正在热映', id: 'in_theaters'},
+  {text: '即将上映', id: 'coming_soon'},
+  {text: 'top250', id: 'top250'},
+  {text: '口碑榜单', id: 'weekly'},
+  {text: '北美票房榜', id: 'us_box'},
+  {text: '新片榜单', id: 'new_movies'}
+]
 
 // 电影banner
 const banners = [{
@@ -35,10 +20,18 @@ const banners = [{
   link: ''
 }]
 
+const initState = {
+  pageInfo: {
+    start: 0,
+    count: 10,
+    total: 0
+  }
+}
+
 const state = {
   banners,
   tags,
-  tag: '',
+  tag: tags[0],
   list: [],
   loading: false,
   pageInfo: {
@@ -57,6 +50,9 @@ const mutations = {
   },
   setLoading (state, payload) {
     state.loading = payload
+  },
+  setTag (state, payload) {
+    state.tag = payload
   }
 }
 
@@ -73,14 +69,15 @@ const getters = {
 const actions = {
   async getMovies ({commit, state}) {
     try {
+      commit('getPageInfo', initState.pageInfo)
+      commit('getMovies', [])
       commit('setLoading', true)
-      let res = await api.getMovieTop250(state.pageInfo.start, state.pageInfo.count)
+      let res = await api.getMovies(state.tag.id, state.pageInfo.start, state.pageInfo.count)
       const {count, start, subjects, total} = res.data
       commit('getMovies', subjects)
       commit('getPageInfo', {count, start, total})
       commit('setLoading', false)
     } catch (e) {
-      console.log(e)
       Toast({
         message: e.msg,
         position: 'bottom',
@@ -90,7 +87,7 @@ const actions = {
   },
   async loadMore ({commit, state}) {
     commit('setLoading', true)
-    let res = await api.getMovieTop250(state.list.length, state.pageInfo.count)
+    let res = await api.getMovies(state.tag.id, state.list.length, state.pageInfo.count)
     const {count, start, subjects, total} = res.data
     commit('getMovies', state.list.concat(subjects))
     commit('getPageInfo', {count, start, total})
