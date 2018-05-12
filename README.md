@@ -2,7 +2,7 @@
 
 vue练习项目
 
-`mint-ui` `axios` `vue-router` `vuex`
+`vue` + `vue-router` + `vuex` + `axios` + `mint-ui`
 
 ## Build Setup
 
