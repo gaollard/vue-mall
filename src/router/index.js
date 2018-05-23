@@ -38,12 +38,18 @@ const router = new Router({
     {
       path: '/movies',
       name: 'Movies',
-      component: Movies
+      component: Movies,
+      meta: {
+        title: '电影列表'
+      }
     },
     {
       path: '/movie/:movieId',
       name: 'MovieDetail',
-      component: MovieDetail
+      component: MovieDetail,
+      meta: {
+        title: '电影详情'
+      }
     },
     {
       path: '/musics',
@@ -75,18 +81,19 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
+  // 每个路由设置title
+  if (to.meta.title) {
+    document.title = to.meta.title
+  }
+  // 这个路由需要登录认证
   if (to.matched.some(record => record.meta.requireAuth)) {
-    // 这个路由需要登录认证
     if (!store.get('userInfo')) {
-      next({
-        path: '/login',
-        query: { redirect: to.fullPath }
-      })
+      next({path: '/login', query: { redirect: to.fullPath }})
     } else {
       next()
     }
   } else {
-    next() // 确保一定要调用 next()
+    next()
   }
 })
 
