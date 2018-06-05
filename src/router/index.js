@@ -29,6 +29,7 @@ const Lost = () => import('../views/lost/lost')
 Vue.use(Router)
 
 const router = new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
