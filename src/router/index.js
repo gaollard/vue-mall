@@ -34,7 +34,11 @@ const router = new Router({
     {
       path: '/',
       name: 'Welcome',
-      component: Welcome
+      component: Welcome,
+      meta: {
+        showTabbar: true,
+        tabbarIndex: 1
+      }
     },
     {
       path: '/movies',

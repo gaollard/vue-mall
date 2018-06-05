@@ -39,9 +39,6 @@ export default {
     return {
       subjects: []
     }
-  },
-  async mounted () {
-    console.log(1)
   }
 }
 </script>
