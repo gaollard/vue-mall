@@ -1,6 +1,8 @@
 <template>
   <div class="wrapper">
-    众人忠哥
+    <div class="hd">
+
+    </div>
   </div>
 </template>
 
@@ -11,5 +13,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.hd {
+  height: 84px;
+  background: url(./img/bg.png) center 0 #f37d0f;
+  background-size: 100%;
+}
 </style>

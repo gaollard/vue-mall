@@ -5,7 +5,12 @@
   margin: 0;
 }
 
+html {
+  height: 100%;
+}
+
 body {
+  height: 100%;
   user-select: none;
   background-color: $body-bg-color;
 }

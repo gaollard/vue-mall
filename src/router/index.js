@@ -4,25 +4,20 @@ import store from 'store'
 
 // 首页
 const Welcome = () => import('../views/welcome/welcome')
-
 // 登录
 const Login = () => import('../views/login/login')
-
+// 购物车
+const Cart = () => import('../views/cart/cart')
 // 个人中心
 const Account = () => import('../views/account/account')
-
 // 电影
 const Movies = () => import('../views/movies/movies')
-
 // 音乐
 const Musics = () => import('../views/musics/musics')
-
 // 书籍
 const Books = () => import('../views/books/books')
-
 // 电影详情
 const MovieDetail = () => import('../views/movie/movie')
-
 // 404
 const Lost = () => import('../views/lost/lost')
 
@@ -38,6 +33,15 @@ const router = new Router({
       meta: {
         showTabbar: true,
         tabbarIndex: 1
+      }
+    },
+    {
+      path: '/cart',
+      name: 'Cart',
+      component: Cart,
+      meta: {
+        showTabbar: true,
+        tabbarIndex: 3
       }
     },
     {
@@ -70,7 +74,11 @@ const router = new Router({
       path: '/account',
       name: 'Account',
       component: Account,
-      meta: { requireAuth: true }
+      meta: {
+        requireAuth: true,
+        showTabbar: true,
+        tabbarIndex: 4
+      }
     },
     {
       path: '/login',

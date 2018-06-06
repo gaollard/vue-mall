@@ -1,11 +1,11 @@
 <template>
   <div id="app">
     <transition name="fade">
-      <div>
+      <div :class="'page-' + routeName">
         <router-view/>
+        <Tabbar v-show="showTabbar" :curIndex="tabbarIndex"></Tabbar>
       </div>
     </transition>
-    <Tabbar v-show="showTabbar"></Tabbar>
   </div>
 </template>
 
@@ -18,12 +18,19 @@ export default {
   },
   data () {
     return {
+      tabbarIndex: 1,
       showTabbar: true,
       animation: 'slide-left'
     }
   },
+  computed: {
+    routeName () {
+      return this.$route.name ? this.$route.name.toLocaleLowerCase() : ''
+    }
+  },
   watch: {
     '$route' (to, from) {
+      this.tabbarIndex = this.$route.meta.tabbarIndex || 1
       this.showTabbar = !!this.$route.meta.showTabbar
       const toDepth = to.path.split('/').length
       const fromDepth = from.path.split('/').length

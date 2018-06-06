@@ -1,7 +1,7 @@
 <template>
   <ul class="tabbar-list">
     <li class="tabbar-item"
-      :class="{'is-active': index === curIndex}"
+      :class="{'is-active': (index + 1) === curIndex}"
       v-for="(item, index) in list"
       :key="index">
       <router-link :to="item.path" v-text="item.text"></router-link>
@@ -14,7 +14,7 @@ export default {
   props: {
     curIndex: {
       type: Number,
-      default: 0
+      default: 1
     },
     list: {
       type: Array,
@@ -38,7 +38,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import '../../scss/vars.scss';
 .tabbar-list {
   position: fixed;

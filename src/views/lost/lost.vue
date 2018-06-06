@@ -12,23 +12,26 @@ export default {
   name: 'lost',
   data () {
     return {
-      second: 3
+      second: 3,
+      timeId: null
     }
   },
   methods: {
-    runCounter () {
-      if (this.second === 0) {
-        this.$router.back()
-      } else {
-        setTimeout(() => {
+    startRun () {
+      this.timeId = setInterval(() => {
+        if (this.second === 0) {
+          this.$router.back()
+        } else {
           this.second -= 1
-          this.runCounter()
-        }, 1000)
-      }
+        }
+      }, 1000)
     }
   },
   mounted () {
-    this.runCounter()
+    this.startRun()
+  },
+  destroyed () {
+    clearInterval(this.timeId)
   }
 }
 </script>
