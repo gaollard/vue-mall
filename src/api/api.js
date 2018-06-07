@@ -2,6 +2,7 @@ import axios from 'axios'
 // const host = process.env.NODE_ENV === 'production' ? 'https://api.douban.com/' : '/host'
 
 const host = '//book.airtlab.com/'
+const bookBase = '//api.airtlab.com:3002/'
 
 /**
  * zhuanzhuan: https://m.zhuanzhuan.58.com/youpin/website/list.html?smark=ws11
@@ -29,5 +30,9 @@ export default {
   // 音乐搜索
   searchMusic (tag) {
     return axios.get(`${host}music/search?tag=${tag}`)
+  },
+  // 获取类目
+  getCategorys () {
+    return axios.get(`${bookBase}category/`)
   }
 }

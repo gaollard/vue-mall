@@ -20,6 +20,8 @@ const Books = () => import('../views/books/books')
 const MovieDetail = () => import('../views/movie/movie')
 // 404
 const Lost = () => import('../views/lost/lost')
+// 类目
+const Products = () => import('../views/products/products')
 
 Vue.use(Router)
 
@@ -33,6 +35,15 @@ const router = new Router({
       meta: {
         showTabbar: true,
         tabbarIndex: 1
+      }
+    },
+    {
+      path: '/category',
+      name: 'category',
+      component: Products,
+      meta: {
+        showTabbar: true,
+        tabbarIndex: 2
       }
     },
     {
