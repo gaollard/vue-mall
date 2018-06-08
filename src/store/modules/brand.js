@@ -1,30 +1,29 @@
 import api from '../../api/api'
-// import { Toast } from 'mint-ui'
 
 export default {
   namespaced: true,
   state: {
-    categorys: [],
+    brands: [],
     loading: false
   },
   getters: {
-    categorys () {
-      return []
+    brands (state) {
+      return state.brands
     }
   },
   mutations: {
-    setCategorys (state, data) {
-      state.categorys = data
+    setBrands (state, data) {
+      state.brands = data
     },
     setLoading (state, data) {
       state.loading = data
     }
   },
   actions: {
-    async getCategorys ({commit, state}) {
+    async getBrands ({commit, state}) {
       commit('setLoading', true)
-      let ret = await api.getCategorys()
-      commit('setCategorys', ret.data.data.categorys)
+      let ret = await api.getBrands()
+      commit('setBrands', ret.data.data.brands)
       commit('setLoading', false)
     }
   }

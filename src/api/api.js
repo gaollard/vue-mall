@@ -2,7 +2,9 @@ import axios from 'axios'
 // const host = process.env.NODE_ENV === 'production' ? 'https://api.douban.com/' : '/host'
 
 const host = '//book.airtlab.com/'
-const bookBase = '//api.airtlab.com:3002/'
+const bookBase = process.env.NODE_ENV === 'production'
+  ? host
+  : '//api.airtlab.com:3002/'
 
 /**
  * zhuanzhuan: https://m.zhuanzhuan.58.com/youpin/website/list.html?smark=ws11
@@ -34,5 +36,13 @@ export default {
   // 获取类目
   getCategorys () {
     return axios.get(`${bookBase}category/`)
+  },
+  // 获取品牌
+  getBrands () {
+    return axios.get(`${bookBase}brand/`)
+  },
+  // 获取产品
+  getProducts () {
+    return axios.get(`${bookBase}product/`)
   }
 }

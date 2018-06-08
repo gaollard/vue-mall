@@ -3,6 +3,7 @@
 * {
   padding: 0;
   margin: 0;
+  box-sizing: border-box;
 }
 
 html {
@@ -50,4 +51,13 @@ a {
 
 .text-center {
   text-align: center;
+}
+
+/**
+ * 文字超出但行不换行
+ */
+.text-nowrap {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
