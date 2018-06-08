@@ -41,8 +41,12 @@ export default {
   getBrands () {
     return axios.get(`${bookBase}brand/`)
   },
-  // 获取产品
+  // 获取产品列表
   getProducts () {
     return axios.get(`${bookBase}product/`)
+  },
+  // 获取产品列表
+  getProductInfo ({ productId }) {
+    return axios.get(`${bookBase}product/${productId}`)
   }
 }

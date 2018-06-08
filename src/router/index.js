@@ -21,12 +21,14 @@ const MovieDetail = () => import('../views/movie/movie')
 // 404
 const Lost = () => import('../views/lost/lost')
 // 类目
-const Products = () => import('../views/products/products')
+const Category = () => import('../views/category/category')
+// 产品详情
+const Product = () => import('../views/product/product')
 
 Vue.use(Router)
 
 const router = new Router({
-  mode: 'history',
+  // mode: 'history',
   routes: [
     {
       path: '/',
@@ -40,10 +42,19 @@ const router = new Router({
     {
       path: '/category',
       name: 'category',
-      component: Products,
+      component: Category,
       meta: {
         showTabbar: true,
         tabbarIndex: 2
+      }
+    },
+    {
+      path: '/product/:productId',
+      name: 'product',
+      component: Product,
+      meta: {
+        title: '商品详情',
+        showTabbar: false
       }
     },
     {

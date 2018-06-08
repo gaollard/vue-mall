@@ -17,7 +17,10 @@
       </div>
       <div class="product-list-wrap">
         <ul class="product-list">
-          <li class="product-item" v-for="(item, index) in products" :key="index">
+          <li class="product-item"
+            v-for="(item, index) in products"
+            @click="navigateToProduct(item)"
+            :key="index">
             <div class="product-logo-wrap">
               <img class="product-logo" :src="imgRoot + item.productLogo " alt="">
             </div>
@@ -54,6 +57,11 @@ export default {
     brands: state => state.brand.brands,
     products: state => state.product.products
   }),
+  methods: {
+    navigateToProduct (item) {
+      this.$router.push(`/product/${item.productId}`)
+    }
+  },
   created () {
     !this.categorys.length && this.$store.dispatch('category/getCategorys')
     !this.brands.length && this.$store.dispatch('brand/getBrands')

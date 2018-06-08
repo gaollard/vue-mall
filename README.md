@@ -4,6 +4,12 @@ vue练习项目
 
 `vue` + `vue-router` + `vuex` + `axios` + `scss` + `mint-ui`
 
+## 项目介绍
+
+1. web安全问题规避
+2. 相关的性能优化点
+3. 相关的交互优化
+
 ## Build Setup
 
 ``` bash
