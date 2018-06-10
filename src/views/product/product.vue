@@ -44,15 +44,40 @@
 
     <!-- 选择相关参数 -->
     <div class="card-params">
-      <div>
-        <div></div>
+      <div class="ui-cell">
+        <div class="ui-cell_label">已选</div>
         <div>小米8 6GB+64GB 黑色 x1</div>
       </div>
-      <div>
-        <div></div>
+      <div class="ui-cell">
+        <div class="ui-cell_label">送至</div>
         <div>北京市 东城区</div>
       </div>
+      <div class="ui-cell">
+        <div class="ensure-item"><i class="icon-down"></i>7天无理由退货</div>
+        <div class="ensure-item"><i class="icon-down"></i>15天质量问题换货</div>
+        <div class="ensure-item"><i class="icon-down"></i>365天保修</div>
+      </div>
     </div>
+    <footer class="fixed-btm">
+      <div class="action-bar-wrap">
+        <div class="to-welcome">
+          <i class="icon-home"></i>
+          <div>首页</div>
+        </div>
+        <div class="line"></div>
+        <div class="to-cart">
+          <i class="icon-cart"></i>
+          <div>购物车</div>
+        </div>
+        <div class="line"></div>
+        <div class="to-collect">
+          <i class="icon-collect"></i>
+          <div>收藏</div>
+        </div>
+        <div class="btn-add-to-cart">加入购物车</div>
+        <div class="btn-buy">马上抢</div>
+      </div>
+    </footer>
   </div>
 </template>
 
@@ -90,6 +115,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+.view-product {
+  padding-bottom: 60px;
+}
 
 .card-logos {
   overflow: hidden;
@@ -157,5 +186,85 @@ export default {
   overflow: hidden;
   margin-top: 8px;
   background-color: #fff;
+  .product-section {
+    margin: 0 16px;
+    .ui-flex {
+      padding: 8px 0;
+    }
+  }
+  .ensure-item {
+    margin-right: 10px;
+  }
+  .icon-down {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin-right: 5px;
+    background-image: url(./down.png);
+    background-size: 100%;
+  }
+}
+
+.fixed-btm {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 50px;
+  background-color: #fff;
+  .action-bar-wrap {
+    display: flex;
+    height: 100%;
+    text-align: center;
+    align-items: center;
+    .to-welcome,
+    .to-collect,
+    .to-cart {
+      width: 60px;
+    }
+    .icon-home {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      background: url(home.png) center no-repeat;
+      background-size: 100%;
+    }
+    .icon-cart {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      background: url(cart.png) center no-repeat;
+      background-size: 100%;
+    }
+    .icon-collect {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      background: url(star.svg) center no-repeat;
+      background-size: 100%;
+    }
+    .line {
+      width: 1px;
+      height: 100%;
+      background-color: #eadccf;
+      transform: scaleX(.5);
+    }
+    .btn-add-to-cart {
+      display: block;
+      height: 100%;
+      flex: 1;
+      color: #fff;
+      line-height: 50px;
+      background-color: #FF9500;
+    }
+    .btn-buy {
+      display: block;
+      height: 100%;
+      flex: 1;
+      color: #fff;
+      line-height: 50px;
+      background-color: #FF0036;
+    }
+  }
 }
 </style>

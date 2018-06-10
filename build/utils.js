@@ -3,6 +3,7 @@ const path = require('path')
 const config = require('../config')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const packageConfig = require('../package.json')
+const pxToRem = require('postcss-px2rem');
 
 exports.assetsPath = function (_path) {
   const assetsSubDirectory = process.env.NODE_ENV === 'production'
@@ -22,6 +23,17 @@ exports.cssLoaders = function (options) {
     }
   }
 
+  const px2remLoader = {
+    loader: 'px2rem-loader',
+    options: {
+      remUnit: 20 //设计稿宽度/10 而二倍图
+    }
+  };
+
+  if (!options.userPxToRem) {
+    px2remLoader.options.remUnit = 10;
+  }
+
   const postcssLoader = {
     loader: 'postcss-loader',
     options: {
@@ -32,7 +44,7 @@ exports.cssLoaders = function (options) {
   // generate loader string to be used with extract text plugin
   function generateLoaders (loader, loaderOptions) {
     const loaders = options.usePostCSS ? [cssLoader, postcssLoader] : [cssLoader]
-
+    // const loaders = options.usePostCSS ? [cssLoader, postcssLoader, px2remLoader] : [cssLoader, px2remLoader];
     if (loader) {
       loaders.push({
         loader: loader + '-loader',

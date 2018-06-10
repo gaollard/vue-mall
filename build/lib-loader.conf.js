@@ -1,3 +1,4 @@
+
 'use strict'
 const utils = require('./utils')
 const config = require('../config')
@@ -10,7 +11,7 @@ module.exports = {
   loaders: utils.cssLoaders({
     sourceMap: sourceMapEnabled,
     extract: isProduction,
-    userPxToRem: true
+    userPxToRem: false
   }),
   cssSourceMap: sourceMapEnabled,
   cacheBusting: config.dev.cacheBusting,
@@ -20,4 +21,4 @@ module.exports = {
     img: 'src',
     image: 'xlink:href'
   }
-}
+};

@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+import user from './modules/user'
 import movie from './modules/movie'
 import category from './modules/category'
 import brand from './modules/brand'
@@ -13,6 +14,7 @@ export default new Vuex.Store({
     imgRoot: '//static.airtlab.com/productlogo/'
   },
   modules: {
+    user,
     movie,
     category,
     brand,

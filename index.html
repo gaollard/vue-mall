@@ -4,6 +4,34 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
     <title>云书</title>
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_701370_v5wmay0xrbqvkj4i.css">
+    <script>
+      ;(function(win, undefined) {
+        var doc = win.document,
+          docEl = doc.documentElement,
+          dpr = win.devicePixelRatio || 1,
+          evtName = 'resize',
+          resizeEvt = function() {
+            // UI设计师以 iPhone6 为设置标准
+            var docWidth = docEl.getBoundingClientRect().width || 375;
+            docEl.style.fontSize = (docWidth / 10) * 2 + 'px';
+          };
+        if (win.addEventListener) {
+          win.addEventListener(evtName, resizeEvt, false);
+        }
+        docEl.setAttribute('data-dpr', dpr);
+        var ua = window.navigator.userAgent;
+        // 苹果系统
+        if (/iPhone/.test(ua)) {
+          docEl.setAttribute('data-iphone', true);
+        }
+        // 安卓系统
+        if (/Android/.test(ua)) {
+          docEl.setAttribute('data-android', true);
+        }
+        resizeEvt();
+      })(window);    
+    </script>
   </head>
   <body>
     <div id="app"></div>

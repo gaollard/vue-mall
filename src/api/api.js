@@ -1,10 +1,23 @@
+import qs from 'qs'
 import axios from 'axios'
 // const host = process.env.NODE_ENV === 'production' ? 'https://api.douban.com/' : '/host'
+
+axios.interceptors.request.use(function (config) {
+  config.headers['Content-Type'] = 'application/x-www-form-urlencoded'
+  if (config.method === 'post') {
+    config.data = qs.stringify({...config.data})
+  }
+  return config
+}, function (error) {
+  return Promise.reject(error)
+})
 
 const host = '//book.airtlab.com/'
 const bookBase = process.env.NODE_ENV === 'production'
   ? host
-  : '//api.airtlab.com:3002/'
+  : 'http://api.airtlab.com:3002/'
+
+// const productionHost = '//book.airtlab.com/'
 
 /**
  * zhuanzhuan: https://m.zhuanzhuan.58.com/youpin/website/list.html?smark=ws11
@@ -48,5 +61,9 @@ export default {
   // 获取产品列表
   getProductInfo ({ productId }) {
     return axios.get(`${bookBase}product/${productId}`)
+  },
+  // 获取产品列表
+  login ({ mobile, password }) {
+    return axios.post(`${bookBase}user/login`, { mobile, password })
   }
 }
