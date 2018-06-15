@@ -1,0 +1,25 @@
+<!DOCTYPE html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,user-scalable=no"><title>云书</title><link rel=stylesheet href=//at.alicdn.com/t/font_701370_v5wmay0xrbqvkj4i.css><script>;(function(win, undefined) {
+        var doc = win.document,
+          docEl = doc.documentElement,
+          dpr = win.devicePixelRatio || 1,
+          evtName = 'resize',
+          resizeEvt = function() {
+            // UI设计师以 iPhone6 为设置标准
+            var docWidth = docEl.getBoundingClientRect().width || 375;
+            docEl.style.fontSize = (docWidth / 10) * 2 + 'px';
+          };
+        if (win.addEventListener) {
+          win.addEventListener(evtName, resizeEvt, false);
+        }
+        docEl.setAttribute('data-dpr', dpr);
+        var ua = window.navigator.userAgent;
+        // 苹果系统
+        if (/iPhone/.test(ua)) {
+          docEl.setAttribute('data-iphone', true);
+        }
+        // 安卓系统
+        if (/Android/.test(ua)) {
+          docEl.setAttribute('data-android', true);
+        }
+        resizeEvt();
+      })(window);</script><link href=/static/css/app.5c86d5b7ad5757cee054a2b2d62e84e0.css rel=stylesheet></head><body><div id=app></div><script type=text/javascript src=/static/js/manifest.0e580fb2275c8e4698bc.js></script><script type=text/javascript src=/static/js/vendor.4f4c51a1d5c5dd224948.js></script><script type=text/javascript src=/static/js/app.40df41b13c126d4ca9b6.js></script></body></html>
