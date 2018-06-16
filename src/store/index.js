@@ -11,7 +11,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    imgRoot: '//static.airtlab.com/productlogo/'
+    imgRoot: 'http://img.airtlab.com/productlogo/'
   },
   modules: {
     user,
