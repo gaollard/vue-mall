@@ -5,8 +5,8 @@
     </div>
     <div class="layout">
       <div class="card-form">
-        <mt-field placeholder="输入您的手机号码" v-model="form.mobile"></mt-field>
-        <mt-field placeholder="输入您的登录密码" type="password" v-model="form.password"></mt-field>
+        <mt-field v-model="form.mobile" placeholder="手机号码"></mt-field>
+        <mt-field v-model="form.password" placeholder="登录密码" type="password"></mt-field>
         <div class="button-wrap" @click="login">
           <mt-button type="primary" size="large">登录</mt-button>
         </div>
@@ -25,6 +25,7 @@
 
 <script>
 import { Field, Button } from 'mint-ui'
+import _ from 'lodash'
 export default {
   components: {
     'mt-field': Field,
@@ -32,16 +33,25 @@ export default {
   },
   data () {
     return {
-      form: {
-        mobile: '18620343136',
-        password: '199389'
-      }
+      form: _.cloneDeep(this.$store.state.user.loginForm)
+    }
+  },
+  watch: {
+    form: {
+      handler (val) {
+        this.$store.commit('user/setLoginForm', _.cloneDeep(val))
+      },
+      deep: true
     }
   },
   methods: {
-    login () {
-      this.$store.dispatch('user/login', {...this.form})
-      this.$router.back()
+    async login () {
+      await this.$store.dispatch('user/login', {...this.form})
+      const { loginToken } = this.$store.state.user
+      const redirect = this.$route.query.redirect
+      if (loginToken) {
+        this.$router.push(redirect || '/')
+      }
     }
   }
 }

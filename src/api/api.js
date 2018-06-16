@@ -1,6 +1,5 @@
 import qs from 'qs'
 import axios from 'axios'
-// const host = process.env.NODE_ENV === 'production' ? 'https://api.douban.com/' : '/host'
 
 axios.interceptors.request.use(function (config) {
   config.headers['Content-Type'] = 'application/x-www-form-urlencoded'
@@ -12,23 +11,24 @@ axios.interceptors.request.use(function (config) {
   return Promise.reject(error)
 })
 
-const host = '//book.airtlab.com/'
-const bookBase = process.env.NODE_ENV === 'production'
-  ? host
-  : 'http://api.airtlab.com:3002/'
+axios.interceptors.response.use(
+  response => {
+    let res = response.data
+    if (res.code === '0') {
+      return res.data
+    } else {
+      if (/\/movie\/.*/.test(response.config.url)) {
+        return response
+      } else {
+        Promise.reject(res.msg)
+      }
+    }
+  },
+  error => Promise.reject(error)
+)
 
-// const productionHost = '//book.airtlab.com/'
-
-/**
- * zhuanzhuan: https://m.zhuanzhuan.58.com/youpin/website/list.html?smark=ws11
- * xiaomi: https://m.mi.com
- * sudanyouxuan: https://m.sdyxmall.com/v1/?co=sdyx#/
- */
-
-/**
- * 豆瓣电影 api
- * https://developers.douban.com/wiki/?title=movie_v2#subject
- */
+const host = '//api.airtlab.com/'
+const bookBase = process.env.NODE_ENV === 'production' ? host : 'http://api.airtlab.com/'
 
 export default {
   // 电影 top250
@@ -65,5 +65,9 @@ export default {
   // 获取产品列表
   login ({ mobile, password }) {
     return axios.post(`${bookBase}user/login`, { mobile, password })
+  },
+  // 获取热门机型
+  getHotProducts () {
+    return axios.get(`${bookBase}product/`)
   }
 }

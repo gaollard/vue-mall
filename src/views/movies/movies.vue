@@ -2,29 +2,28 @@
   <div class="view">
     <div class="banner-list">
       <swiper :options="swiperOption">
-        <swiper-slide class="banner-item"
-          v-for="(item, index) in banners"
-          :key="index">
+        <swiper-slide class="banner-item" v-for="(item, index) in banners" :key="index">
           <img class="banner-img" :src="item.img"/>
         </swiper-slide>
       </swiper>
     </div>
     <div class="tag-list-wrap">
       <ul class="tag-list">
-        <li class="tag-item"
+        <li
+          class="tag-item"
           :class="{'is-current': tag === item}"
           v-for="(item, index) in tags"
           @click="switchTag(item)"
-          :key="index">{{item.text}}</li>
+          :key="index"
+        >{{item.text}}</li>
       </ul>
     </div>
-    <div class="loading-text"
-      v-if="loading && subjects.length === 0">- 加载中 -</div>
+    <div class="loading-text" v-if="loading && subjects.length === 0">- 加载中 -</div>
     <div v-show="subjects.length">
       <ul class="movie-list"
         v-infinite-scroll="loadMore"
         infinite-scroll-disabled="loading"
-        infinite-scroll-distance="10">
+        infinite-scroll-distance="40">
         <li class="movie-item" v-for="item in subjects" :key="item.id">
           <router-link class="link" :to="'/movie/' + item.id">
             <div class="item-left">
@@ -38,12 +37,11 @@
                 <span class="move-director" v-for="director in item.directors" :key="director.name">{{ director.name }}/</span>
               </div>
               <div class="movie-average">豆瓣评分{{ item.rating.average }}</div>
-              <!-- <button>想看</button> -->
             </div>
           </router-link>
         </li>
       </ul>
-      <div class="loading-text" v-show="loading">- 加载中 -</div>
+      <div class="loading-text fixed" v-show="loading">- 加载中 -</div>
       <div class="loading-text" v-show="!loading && subjects.length === pageInfo.total">- 没有更多数据 -</div>
     </div>
   </div>
@@ -107,6 +105,13 @@ export default {
   height: 40px;
   line-height: 40px;
   text-align: center;
+  &.fixed {
+    /*position: fixed;*/
+    /*width: 100%;*/
+    /*bottom: 0;*/
+    /*background-color: #fff;*/
+    /*bac*/
+  }
 }
 
 .banner-list {
@@ -177,6 +182,7 @@ export default {
   .movie-logo {
     display: block;
     width: 78px;
+    height: 117px;
   }
   .movie-name {
     margin-top: 0px;

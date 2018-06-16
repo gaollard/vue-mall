@@ -6,7 +6,12 @@ export default {
   state: {
     userInfo: cookie.getJSON('userInfo') || null,
     loading: false,
-    loginToken: cookie.get('loginToken') || ''
+    loginToken: cookie.get('loginToken') || '',
+    loginForm: {
+      mobile: '18620343136',
+      password: '199389'
+    },
+    errMsg: ''
   },
   getters: {
     userInfo (state) {
@@ -22,6 +27,12 @@ export default {
     },
     setLoginToken (state, data) {
       state.loginToken = data
+    },
+    setLoginForm (state, data) {
+      state.loginForm = data
+    },
+    setErrMsg (state, data) {
+      state.errMsg = data
     }
   },
   actions: {
@@ -30,29 +41,32 @@ export default {
     async getUserInfo ({commit, state}) {
       commit('setLoading', true)
       let ret = await api.getUserInfo()
-      commit('setUserInfo', ret.data.data.userInfo)
+      commit('setUserInfo', ret.userInfo)
       commit('setLoading', false)
     },
 
     // 登录并获取用户信息
     async login ({commit, state}, {mobile, password}) {
       commit('setLoading', true)
-      let ret = await api.login({mobile, password})
-      const { loginToken, userInfo } = ret.data.data
-      cookie.set('loginToken', loginToken)
-      cookie.set('userInfo', userInfo)
-      commit('setLoginToken', loginToken)
-      commit('setUserInfo', userInfo)
+      try {
+        let ret = await api.login({ mobile, password })
+        const { loginToken, userInfo } = ret
+        cookie.set('loginToken', loginToken)
+        cookie.set('userInfo', userInfo)
+        commit('setLoginToken', loginToken)
+        commit('setUserInfo', userInfo)
+      } catch (e) {
+        console.log(e)
+      }
       commit('setLoading', false)
     },
 
-    // 退出登录
     // 登录并获取用户信息
     async loginOut ({commit, state}) {
       cookie.remove('loginToken')
       cookie.remove('userInfo')
       commit('setLoginToken', '')
       commit('setUserInfo', null)
-    },    
+    }
   }
 }

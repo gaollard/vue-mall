@@ -3,27 +3,22 @@ import api from '../../api/api'
 export default {
   namespaced: true,
   state: {
-    brands: [],
+    products: [],
     loading: false
   },
-  getters: {
-    brands (state) {
-      return state.brands
-    }
-  },
   mutations: {
-    setBrands (state, data) {
-      state.brands = data
+    setProducts (state, data) {
+      state.products = data
     },
     setLoading (state, data) {
       state.loading = data
     }
   },
   actions: {
-    async getBrands ({commit, state}) {
+    async getProducts ({commit, state}) {
       commit('setLoading', true)
-      let ret = await api.getBrands()
-      commit('setBrands', ret.brands)
+      let ret = await api.getProducts()
+      commit('setProducts', ret.products)
       commit('setLoading', false)
     }
   }

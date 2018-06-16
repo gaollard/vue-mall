@@ -1,40 +1,32 @@
 <template>
-  <div class="wrap">
-    <img width="100%" src="https://mall.s.maizuo.com/477c3a31cd14cb55b5cb019d73b28b4a.jpg?x-oss-process=image/quality,Q_70" alt="">
+  <div class="view-welcome">
+    <div class="banner">
+      <img src="https://mall.s.maizuo.com/0690e3551f92b8b1dcdf9be0dc3b9b69.jpg?x-oss-process=image/quality,Q_70">
+    </div>
     <ul class="cate-list">
       <li class="cate-item">
-        <router-link to="/musics">音乐</router-link>
+        <router-link to="/posts">接需求</router-link>
       </li>
       <li class="cate-item">
-        <router-link to="/movies">电影</router-link>
+        <router-link to="/category">买好书</router-link>
       </li>
       <li class="cate-item">
-        <router-link to="/books">图书</router-link>
+        <router-link to="/movies">看电影</router-link>
+      </li>
+      <li class="cate-item">
+        <router-link to="/musics">卖手机</router-link>
       </li>
     </ul>
-    <ul class="movie-list">
-      <li class="movie-item" v-for="item in subjects" :key="item.id">
-        <router-link class="link" :to="'/movie/' + item.id">
-          <div class="item-left fl">
-            <img class="movie-logo" :src="item.images.large" alt="">
-          </div>
-          <div class="item-right fr">
-            <div class="movie-name fr">{{ item.title }}</div>
-            <div class="movie-desc">
-              <span class="movie-year">{{ item.year }}</span>
-              <span class="movie-genre" v-for="genre in item.genres" :key="genre">{{ genre }}</span>
-              <span class="move-director" v-for="director in item.directors" :key="director.name">{{ director.name }}</span>
-            </div>
-            <div class="movie-average">豆瓣评分{{ item.rating.average }}</div>
-          </div>
-        </router-link>
-      </li>
-    </ul>
+    <welcome-product></welcome-product>
   </div>
 </template>
 
 <script type="text/javascript">
+import WelcomeProduct from '@/components/welcome-products/welcome-products'
 export default {
+  components: {
+    WelcomeProduct
+  },
   data () {
     return {
       subjects: []
@@ -44,9 +36,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.banner {
+  width: 100%;
+  img {
+    display: block;
+    width: 100%;
+  }
+}
 .cate-list {
   position: relative;
   display: flex;
+  background-color: #fff;
   &::after {
     content: " ";
     position: absolute;

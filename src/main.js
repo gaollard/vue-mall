@@ -5,6 +5,7 @@ import App from './App'
 import router from './router'
 import store from './store/index'
 import './assets/css/global.scss'
+import './assets/css/recover.scss'
 
 Vue.config.productionTip = false
 

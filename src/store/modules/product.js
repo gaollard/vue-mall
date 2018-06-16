@@ -27,13 +27,13 @@ export default {
     async getProducts ({commit, state}) {
       commit('setLoading', true)
       let ret = await api.getProducts()
-      commit('setProducts', ret.data.data.products)
+      commit('setProducts', ret.products)
       commit('setLoading', false)
     },
     async getProductInfo ({ commit }, {productId}) {
       commit('setLoading', true)
       let ret = await api.getProductInfo({productId})
-      commit('setProduct', ret.data.data)
+      commit('setProduct', ret)
       commit('setLoading', false)
     }
   }

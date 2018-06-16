@@ -24,7 +24,7 @@ export default {
     async getCategorys ({commit, state}) {
       commit('setLoading', true)
       let ret = await api.getCategorys()
-      commit('setCategorys', ret.data.data.categorys)
+      commit('setCategorys', ret.categorys)
       commit('setLoading', false)
     }
   }

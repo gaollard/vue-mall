@@ -6,7 +6,7 @@
           resizeEvt = function() {
             // UI设计师以 iPhone6 为设置标准
             var docWidth = docEl.getBoundingClientRect().width || 375;
-            docEl.style.fontSize = (docWidth / 10) * 2 + 'px';
+            docEl.style.fontSize = Math.min((docWidth / 10) * 2, 100) + 'px';
           };
         if (win.addEventListener) {
           win.addEventListener(evtName, resizeEvt, false);
@@ -22,4 +22,4 @@
           docEl.setAttribute('data-android', true);
         }
         resizeEvt();
-      })(window);</script><link href=/static/css/app.5c86d5b7ad5757cee054a2b2d62e84e0.css rel=stylesheet></head><body><div id=app></div><script type=text/javascript src=/static/js/manifest.0e580fb2275c8e4698bc.js></script><script type=text/javascript src=/static/js/vendor.4f4c51a1d5c5dd224948.js></script><script type=text/javascript src=/static/js/app.c208045bc861954f9774.js></script></body></html>
+      })(window);</script><link href=/static/css/app.90d033a4e7f34b3e1bd57ea302dcea2d.css rel=stylesheet></head><body><div id=app></div><script type=text/javascript src=/static/js/manifest.47ed8095c248d3b78726.js></script><script type=text/javascript src=/static/js/vendor.ca5130a5e0c701b27b5c.js></script><script type=text/javascript src=/static/js/app.6c6abf5e859e5cc7e331.js></script></body></html>

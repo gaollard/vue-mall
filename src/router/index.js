@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import store from 'store'
+import cookie from 'js-cookie'
 
 // 首页
 const Welcome = () => import('../views/welcome/welcome')
@@ -24,11 +24,13 @@ const Lost = () => import('../views/lost/lost')
 const Category = () => import('../views/category/category')
 // 产品详情
 const Product = () => import('../views/product/product')
+// 帖子列表
+const Posts = () => import('../views/posts/posts')
 
 Vue.use(Router)
 
 const router = new Router({
-  // mode: 'history',
+  mode: 'history',
   routes: [
     {
       path: '/',
@@ -103,6 +105,11 @@ const router = new Router({
       }
     },
     {
+      path: '/posts',
+      name: 'Posts',
+      component: Posts
+    },
+    {
       path: '/login',
       name: 'Login',
       component: Login
@@ -122,8 +129,13 @@ router.beforeEach((to, from, next) => {
   }
   // 这个路由需要登录认证
   if (to.matched.some(record => record.meta.requireAuth)) {
-    if (!store.get('userInfo')) {
-      next({path: '/login', query: { redirect: to.fullPath }})
+    if (!cookie.get('loginToken')) {
+      next({
+        path: '/login',
+        query: {
+          redirect: to.fullPath
+        }
+      })
     } else {
       next()
     }
