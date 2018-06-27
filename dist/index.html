@@ -1,25 +1,62 @@
-<!DOCTYPE html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,user-scalable=no"><title>云书</title><link rel=stylesheet href=//at.alicdn.com/t/font_701370_v5wmay0xrbqvkj4i.css><script>;(function(win, undefined) {
-        var doc = win.document,
-          docEl = doc.documentElement,
-          dpr = win.devicePixelRatio || 1,
-          evtName = 'resize',
-          resizeEvt = function() {
-            // UI设计师以 iPhone6 为设置标准
-            var docWidth = docEl.getBoundingClientRect().width || 375;
-            docEl.style.fontSize = Math.min((docWidth / 10) * 2, 100) + 'px';
-          };
-        if (win.addEventListener) {
-          win.addEventListener(evtName, resizeEvt, false);
-        }
-        docEl.setAttribute('data-dpr', dpr);
-        var ua = window.navigator.userAgent;
-        // 苹果系统
-        if (/iPhone/.test(ua)) {
-          docEl.setAttribute('data-iphone', true);
-        }
-        // 安卓系统
-        if (/Android/.test(ua)) {
-          docEl.setAttribute('data-android', true);
-        }
-        resizeEvt();
-      })(window);</script><link href=/static/css/app.90d033a4e7f34b3e1bd57ea302dcea2d.css rel=stylesheet></head><body><div id=app></div><script type=text/javascript src=/static/js/manifest.47ed8095c248d3b78726.js></script><script type=text/javascript src=/static/js/vendor.ca5130a5e0c701b27b5c.js></script><script type=text/javascript src=/static/js/app.6c6abf5e859e5cc7e331.js></script></body></html>
+<!DOCTYPE html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,user-scalable=no"><title>云书</title><style type=text/css media=screen>.sketch {
+      width: 140px;
+      height: 40px;
+      margin: 0 auto;
+      margin-top: 45%;
+    }
+    .sketch span {
+      display: inline-block;
+      width: 8px;
+      height: 100%;
+      border-radius: 4px;
+      background: lightgreen;
+      animation: load 1s ease infinite;
+    }
+    @keyframes load {
+      0%,
+      100% {
+        height: 40px;
+        background: lightgreen;
+      }
+      50% {
+        height: 70px;
+        margin: -15px 0;
+        background: lightblue;
+      }
+    }
+    .sketch span:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+    .sketch span:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+    .sketch span:nth-child(4) {
+      animation-delay: 0.6s;
+    }
+    .sketch span:nth-child(5) {
+      animation-delay: 0.8s;
+    }</style><script>; (function (win, undefined) {
+      var doc = win.document,
+        docEl = doc.documentElement,
+        dpr = win.devicePixelRatio || 1,
+        evtName = 'resize',
+        resizeEvt = function () {
+          // UI设计师以 iPhone6 为设置标准
+          var docWidth = docEl.getBoundingClientRect().width || 375;
+          docEl.style.fontSize = Math.min((docWidth / 10) * 2, 100) + 'px';
+        };
+      if (win.addEventListener) {
+        win.addEventListener(evtName, resizeEvt, false);
+      }
+      docEl.setAttribute('data-dpr', dpr);
+      var ua = window.navigator.userAgent;
+      // 苹果系统
+      if (/iPhone/.test(ua)) {
+        docEl.setAttribute('data-iphone', true);
+      }
+      // 安卓系统
+      if (/Android/.test(ua)) {
+        docEl.setAttribute('data-android', true);
+      }
+      resizeEvt();
+    })(window);</script><link href=/static/css/app.8024ca7361f7b3fdeaceecfd7a435bd0.css rel=stylesheet></head><body><div id=app><div class=sketch><span></span> <span></span> <span></span> <span></span> <span></span></div></div><script type=text/javascript src=/static/js/manifest.ef045347b327b67c3c1e.js></script><script type=text/javascript src=/static/js/vendor.97056ac80cb78653fc59.js></script><script type=text/javascript src=/static/js/app.0e70150415fd86d67521.js></script></body></html>
