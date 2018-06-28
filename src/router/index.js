@@ -26,6 +26,8 @@ const Category = () => import('../views/category/category')
 const Product = () => import('../views/product/product')
 // 帖子列表
 const Posts = () => import('../views/posts/posts')
+// 帖子详情
+const PostItem = () => import('../views/post-item/post-item')
 
 Vue.use(Router)
 
@@ -108,6 +110,11 @@ const router = new Router({
       path: '/posts',
       name: 'Posts',
       component: Posts
+    },
+    {
+      path: '/post/:postId',
+      name: 'PostItem',
+      component: PostItem
     },
     {
       path: '/login',

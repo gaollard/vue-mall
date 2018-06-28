@@ -60,5 +60,9 @@ export default {
     line-height: 1.2;
     color: #2e3135;
   }
+  .intro {
+    margin-top: 12px;
+    color: #909090;
+  }
 }
 </style>

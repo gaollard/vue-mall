@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div :class="'page-' + routeName">
-      <transition :name="animation">
+      <transition name="fade">
         <router-view/>
       </transition>
       <Tabbar v-show="showTabbar" :curIndex="tabbarIndex"></Tabbar>
@@ -42,14 +42,13 @@ export default {
 </script>
 
 <style lang="scss">
-
-/*.fade-enter-active, .fade-leave-active {
+.fade-enter-active, .fade-leave-active {
   transition: all .4s ease;
 }
 .fade-enter, .fade-leave-active {
   opacity: 0;
-  transform: translateY(20px);
-}*/
+  // transform: translateY(20px);
+}
 
 .slide-left-enter-active, .slide-left-leave-active {
   transition: all .4s ease;

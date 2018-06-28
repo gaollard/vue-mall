@@ -19,10 +19,16 @@ export default {
     }
   },
   actions: {
-    async getPosts ({commit, state}) {
+    async getPosts ({ commit, state }) {
       commit('setLoading', true)
       let ret = await api.getPosts()
       commit('setPosts', ret.list)
+      commit('setLoading', false)
+    },
+    async getPost ({ commit }, { postId }) {
+      commit('setLoading', true)
+      let ret = await api.getPostItem({ postId })
+      commit('setPost', ret)
       commit('setLoading', false)
     }
   }
