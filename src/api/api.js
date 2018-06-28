@@ -69,5 +69,25 @@ export default {
   // 获取热门机型
   getHotProducts () {
     return axios.get(`${bookBase}product/`)
+  },
+
+  // 帖子列表
+  getPosts () {
+    return axios.get(`${bookBase}post`)
+  },
+  // 文章详情
+  getPostItem ({ postId }) {
+    return axios.get(`${bookBase}post/${postId}`)
+  },
+  // 添加文章
+  addPost (params) {
+    return axios.post(`${bookBase}post`, params)
+  },
+  // 更新文章
+  updatePost ({ postId, markdown, title }) {
+    return axios.post(`${bookBase}post/${postId}`, {
+      title,
+      markdown
+    })
   }
 }
