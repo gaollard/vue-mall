@@ -7,6 +7,7 @@ import category from './modules/category'
 import brand from './modules/brand'
 import product from './modules/product'
 import welProduct from './modules/welProduct'
+import post from './modules/post'
 
 Vue.use(Vuex)
 
@@ -15,6 +16,7 @@ export default new Vuex.Store({
     imgRoot: 'http://img.airtlab.com/productlogo/'
   },
   modules: {
+    post,
     user,
     movie,
     category,
