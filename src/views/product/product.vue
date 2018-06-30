@@ -74,7 +74,7 @@
           <i class="icon-collect"></i>
           <div>收藏</div>
         </div>
-        <div class="btn-add-to-cart">加入购物车</div>
+        <div class="btn-add-to-cart" @click="addToCart">加入购物车</div>
         <div class="btn-buy">马上抢</div>
       </div>
     </footer>
@@ -85,20 +85,21 @@
 import { mapState } from 'vuex'
 import 'swiper/dist/css/swiper.css'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
+import imgList from './imgs'
+
 export default {
   components: {
     swiper,
     swiperSlide
   },
+  methods: {
+    addToCart () {
+      this.$store.dispatch('cart/addToCart', this.product)
+    }
+  },
   data () {
     return {
-      imgList: [{
-        imgUrl: 'https://img2.xianghuanji.com/image/product/4e1034cebc820f9d73920d5c0b751f44.jpg@750w_520h_1e_1c.jpg'
-      }, {
-        imgUrl: 'https://img2.xianghuanji.com/image/product/7017c603d75f9c9e6a7414c10000bac1.jpg@750w_520h_1e_1c.jpg'
-      }, {
-        imgUrl: 'https://img2.xianghuanji.com/image/product/45773d013db7d5c73fe999175079610d.jpg@750w_520h_1e_1c.jpg'
-      }]
+      imgList
     }
   },
   computed: mapState({

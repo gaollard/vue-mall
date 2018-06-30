@@ -43,26 +43,26 @@ export default {
 
 <style lang="scss">
 .fade-enter-active, .fade-leave-active {
-  transition: all .4s ease;
+  transition: opacity 0s ease;
 }
 .fade-enter, .fade-leave-active {
   opacity: 0;
-  // transform: translateY(20px);
+  // transform: translateY(10px);
 }
 
-.slide-left-enter-active, .slide-left-leave-active {
-  transition: all .4s ease;
-  transform: translate3d(20%, 0, 0);
-}
-.slide-left-enter, .slide-left-leave-active {
-  transform: translate3d(-100%, 0, 0);
-}
+// .slide-left-enter-active, .slide-left-leave-active {
+//   transition: all .4s ease;
+//   transform: translate3d(20%, 0, 0);
+// }
+// .slide-left-enter, .slide-left-leave-active {
+//   transform: translate3d(-100%, 0, 0);
+// }
 
-.slide-right-enter-active, .slide-right-leave-active {
-  transition: all .4s ease;
-  transform: translate3d(0, 0, 0);
-}
-.slide-right-enter, .slide-right-leave-active {
-  transform: translate3d(100%, 0, 0);
-}
+// .slide-right-enter-active, .slide-right-leave-active {
+//   transition: all .4s ease;
+//   transform: translate3d(0, 0, 0);
+// }
+// .slide-right-enter, .slide-right-leave-active {
+//   transform: translate3d(100%, 0, 0);
+// }
 </style>

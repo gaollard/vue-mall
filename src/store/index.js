@@ -8,6 +8,7 @@ import brand from './modules/brand'
 import product from './modules/product'
 import welProduct from './modules/welProduct'
 import post from './modules/post'
+import cart from './modules/cart'
 
 Vue.use(Vuex)
 
@@ -22,6 +23,7 @@ export default new Vuex.Store({
     category,
     brand,
     product,
-    welProduct
+    welProduct,
+    cart
   }
 })
