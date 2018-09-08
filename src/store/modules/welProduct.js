@@ -18,7 +18,7 @@ export default {
     async getProducts ({commit, state}) {
       commit('setLoading', true)
       let ret = await api.getProducts()
-      commit('setProducts', ret.products)
+      commit('setProducts', ret.data.list)
       commit('setLoading', false)
     }
   }

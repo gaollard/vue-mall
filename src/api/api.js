@@ -4,7 +4,9 @@ import axios from 'axios'
 axios.interceptors.request.use(function (config) {
   config.headers['Content-Type'] = 'application/x-www-form-urlencoded'
   if (config.method === 'post') {
-    config.data = qs.stringify({...config.data})
+    config.data = qs.stringify({
+      ...config.data
+    })
   }
   return config
 }, function (error) {
@@ -15,7 +17,7 @@ axios.interceptors.response.use(
   response => {
     let res = response.data
     if (res.code === '0') {
-      return res.data
+      return res
     } else {
       if (/\/movie\/.*/.test(response.config.url)) {
         return response
@@ -28,7 +30,9 @@ axios.interceptors.response.use(
 )
 
 const host = '//api.airtlab.com/'
-const bookBase = process.env.NODE_ENV === 'production' ? host : 'http://api.airtlab.com/'
+const bookBase = process.env.NODE_ENV === 'production'
+  ? host
+  : '/api/'
 
 export default {
   // 电影 top250
