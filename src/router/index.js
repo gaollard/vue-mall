@@ -44,6 +44,14 @@ const router = new Router({
       }
     },
     {
+      path: '/order',
+      name: 'Order',
+      component: () => import('../views/order/index'),
+      meta: {
+        requireAuth: true
+      }
+    },
+    {
       path: '/category',
       name: 'category',
       component: Category,

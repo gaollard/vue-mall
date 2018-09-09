@@ -1,33 +1,4 @@
-import qs from 'qs'
-import axios from 'axios'
-
-axios.interceptors.request.use(function (config) {
-  config.headers['Content-Type'] = 'application/x-www-form-urlencoded'
-  if (config.method === 'post') {
-    config.data = qs.stringify({
-      ...config.data
-    })
-  }
-  return config
-}, function (error) {
-  return Promise.reject(error)
-})
-
-axios.interceptors.response.use(
-  response => {
-    let res = response.data
-    if (res.code === '0') {
-      return res
-    } else {
-      if (/\/movie\/.*/.test(response.config.url)) {
-        return response
-      } else {
-        Promise.reject(res.msg)
-      }
-    }
-  },
-  error => Promise.reject(error)
-)
+import axios from '../utils/fetch'
 
 const host = '//api.airtlab.com/'
 const bookBase = process.env.NODE_ENV === 'production'
@@ -93,5 +64,13 @@ export default {
       title,
       markdown
     })
+  },
+  // 获取订单列表
+  getOrderList () {
+    return axios.get(`${bookBase}order/`)
+  },
+  // 下单
+  placeOrder ({ payment, orderItems }) {
+    return axios.post(`${bookBase}order/`, { payment, orderItems })
   }
 }
