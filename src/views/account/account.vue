@@ -42,6 +42,16 @@
         <li class="ui-cell" @click="loginOut" v-if="userInfo">
           <div class="ui-cell-label">退出登录</div>
         </li>
+        <li class="ui-cell">
+          <div class="ui-cell-label">
+            <router-link to="/updateUserInfo">更新用户信息</router-link>
+          </div>
+        </li>
+        <li class="ui-cell">
+          <div class="ui-cell-label">
+            <router-link to="/MyDeliveryAddress">我的收货地址</router-link>
+          </div>
+        </li>
       </ul>
     </div>
   </div>

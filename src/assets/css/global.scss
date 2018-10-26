@@ -7,12 +7,12 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-html {
-  height: 100%;
+html,
+body {
+  min-height: 100%;
 }
 
 body {
-  height: 100%;
   user-select: none;
   background-color: $body-bg-color;
 }
@@ -34,6 +34,11 @@ a {
   text-decoration: none;
   color: inherit;
 }
+
+button {
+  -webkit-appearance: none;
+}
+
 
 .fl {
   float: left;

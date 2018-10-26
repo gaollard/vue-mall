@@ -15,7 +15,7 @@ axios.interceptors.response.use(
   response => {
     let res = response.data
     if (res.code === '0') {
-      return res.data
+      return res
     } else {
       if (/\/movie\/.*/.test(response.config.url)) {
         return response
@@ -27,8 +27,8 @@ axios.interceptors.response.use(
   error => Promise.reject(error)
 )
 
-const host = '//api.airtlab.com/'
-const bookBase = process.env.NODE_ENV === 'production' ? host : 'http://api.airtlab.com/'
+const host = 'http://127.0.0.1:7001/'
+const bookBase = process.env.NODE_ENV === 'production' ? 'http://api.airtlab.com/' : 'http://api.airtlab.com:7001/'
 
 export default {
   // 电影 top250
@@ -45,6 +45,9 @@ export default {
   // 音乐搜索
   searchMusic (tag) {
     return axios.get(`${host}music/search?tag=${tag}`)
+  },
+  getSfCityList () {
+    return axios.get(`${bookBase}common/getSfCityList`)
   },
   // 获取类目
   getCategorys () {

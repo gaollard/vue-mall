@@ -28,12 +28,26 @@ const Product = () => import('../views/product/product')
 const Posts = () => import('../views/posts/posts')
 // 帖子详情
 const PostItem = () => import('../views/post-item/post-item')
+// 更新用户信息
+const updateUserInfo = () => import('../views/updateUserInfo/index')
+// 收货地址
+const myDeliveryAddress = () => import('../views/myDeliveryAddress')
 
 Vue.use(Router)
 
 const router = new Router({
   mode: 'history',
   routes: [
+    {
+      path: '/updateUserInfo',
+      name: 'updateUserInfo',
+      component: updateUserInfo
+    },
+    {
+      path: '/myDeliveryAddress',
+      name: 'myDeliveryAddress',
+      component: myDeliveryAddress
+    },
     {
       path: '/',
       name: 'Welcome',

@@ -6,8 +6,10 @@ import router from './router'
 import store from './store/index'
 import './assets/css/global.scss'
 import './assets/css/recover.scss'
+import api from './api/api'
 
 Vue.config.productionTip = false
+Vue.prototype.$api = api
 
 /* eslint-disable no-new */
 new Vue({

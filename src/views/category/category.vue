@@ -55,7 +55,10 @@ export default {
     imgRoot: state => state.imgRoot,
     categorys: state => state.category.categorys,
     brands: state => state.brand.brands,
-    products: state => state.product.products.slice(0, 8)
+    products: state => {
+      console.log(state.product)
+      return state.product.products.slice(0, 8)
+    }
   }),
   methods: {
     navigateToProduct (item) {
