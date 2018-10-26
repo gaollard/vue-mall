@@ -1,4 +1,5 @@
 import store from 'store'
+import api from '../../api/api'
 
 export default {
   namespaced: true,
@@ -18,6 +19,7 @@ export default {
   },
   mutations: {
     addToCart (state, payload) {
+      console.log(payload)
       state.list.push(payload)
       store.set('cartList', state.list)
     },
@@ -27,19 +29,16 @@ export default {
     }
   },
   actions: {
-
     // 添加到购物车
     addToCart ({ commit, state }, payload) {
       commit('addToCart', payload)
     },
-
     // 切换
     toggle ({ commit, state }, index) {
       let item = state.list[index]
       item.checked = !item.checked
       commit('setList', [].concat(state.list))
     },
-
     // 全部切换
     toggleAll ({ commit, state, getters }) {
       let list = state.list
@@ -49,11 +48,15 @@ export default {
       })
       commit('setList', [].concat(list))
     },
-
     // 从购物车中移除
     remove ({ commit, state }, index) {
       state.list.splice(index, 1)
       commit('setList', state.list)
+    },
+    async placeOrder ({ commit, getters }) {
+      const orderItems = getters.checkList
+      const payment = getters.totalPrice
+      let ret = await api.placeOrder({ orderItems, payment })
     }
   }
 }

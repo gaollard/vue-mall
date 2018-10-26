@@ -47,7 +47,7 @@
       </div>
       <div class="right">
         <span class="amount">¥{{ totalPrice / 100 }}.00</span>
-        <button class="btn-calcu" :class="{'is-active': checkList.length }">结算</button>
+        <button class="btn-calcu" :class="{'is-active': checkList.length }" @click="submit">结算</button>
       </div>
     </div>
     <div class="blank"></div>
@@ -76,6 +76,9 @@ export default {
     },
     remove (index) {
       this.$store.dispatch('cart/remove', index)
+    },
+    submit () {
+      this.$store.dispatch('cart/placeOrder')
     }
   }
 }

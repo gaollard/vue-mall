@@ -32,11 +32,18 @@ module.exports = {
         pathRewrite: {
           '^/host': '/'
         }
+      },
+      '/api': {
+        target: 'http://127.0.0.1:7001/',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/api': '/'
+        }
       }
     },
 
     // Various Dev Server settings
-    host: getIPAddress(), //getIPAddress(), // can be overwritten by process.env.HOST
+    host: 'localhost', //getIPAddress(), // can be overwritten by process.env.HOST
     port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: true,
     errorOverlay: true,

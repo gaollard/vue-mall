@@ -28,7 +28,9 @@
     <div class="card-links">
       <ul class="ui-cells">
         <li class="ui-cell">
-          <div class="ui-cell-label">我的订单</div>
+          <div class="ui-cell-label">
+            <router-link to="/order">我的订单</router-link>
+          </div>
         </li>
         <li class="ui-cell">
           <div class="ui-cell-label">账户设置</div>
